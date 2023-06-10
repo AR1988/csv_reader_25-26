@@ -1,10 +1,16 @@
 package de.ait.file.helper;
 
+import de.ait.logger.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * @author Andrej Reutow
@@ -27,7 +33,10 @@ public class FileUtils {
             // Получаем дату создания файла
             FileTime fileTime = attr.creationTime();
             // Возвращаем дату создания файла в миллисекундах
-            return fileTime.toMillis();
+            long createdDate = fileTime.toMillis();
+            LocalDateTime localDate = Instant.ofEpochMilli(createdDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+            Logger.info("Файл " + file.getName() + ", дата создания: " + localDate);
+            return createdDate;
         } catch (IOException ex) {
             // Если возникает ошибка ввода-вывода, выбрасываем исключение RuntimeException
             throw new RuntimeException(ex);
