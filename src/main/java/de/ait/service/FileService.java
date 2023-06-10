@@ -1,6 +1,7 @@
 package de.ait.service;
 
 import de.ait.file.helper.ComparatorSortByDate;
+import de.ait.logger.Logger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -38,6 +39,7 @@ public class FileService implements IFileService {
          */
 
         File directory = new File(folderPath);
+        Logger.info("Читаю папку: " + folderPath);
         if (!directory.isDirectory()) {
             throw new RuntimeException("This path is not a directory");
         }
@@ -49,8 +51,11 @@ public class FileService implements IFileService {
                 files.add(file);
             }
         }
+        Logger.info("В папке " + folderPath + " содержится " + files.size() + " файлов");
         files.sort(new ComparatorSortByDate());
-        return files.get(0);
+        File file = files.get(0);
+        Logger.info("Самый старый файл в папке: " + folderPath + " : " + file.getName());
+        return file;
     }
 
     /**
@@ -58,8 +63,11 @@ public class FileService implements IFileService {
      */
     @Override
     public List<String> readFile(File fileToRead) {
+        Logger.info("Читаем файл:" + fileToRead.getName());
         try {
-            return Files.readAllLines(fileToRead.getAbsoluteFile().toPath());
+            List<String> rows = Files.readAllLines(fileToRead.getAbsoluteFile().toPath());
+            Logger.debug("Файл " + fileToRead.getName() + ", количество строк:" + rows.size());
+            return rows;
         } catch (IOException e) {
             //TODO handle it
             throw new RuntimeException(e);
