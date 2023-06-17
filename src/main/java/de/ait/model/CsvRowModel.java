@@ -6,228 +6,148 @@ package de.ait.model;
  */
 public class CsvRowModel {
 
-    private int rowNr;
-    private String table;
-    private String transaktion_typ_key;
-    private String operation_typ_key;
-    private String transactions_code;
-    private String transaktion_nummer;
-    private String additional_transaktion_number;
-    private String betrag;
-    private String currency;
-    private String kontonr;
-    private String blz;
-    private String trans_datum;
-    private String valuta;
-    private String mandateferenz;
-    private String kunde_id;
-    private String vw_1;
-    private String vw_2;
-    private String bemerkung_1;
-    private String bemerkung_2;
-    private String bemerkung_3;
+    private final int rowNr;
+    private final String table;
+    private final String transaktionTypKey;
+    private final String operationTypKey;
+    private final String transactionsCode;
+    private final String transaktionNr;
+    private final String additionalTransaktionNr;
+    private final String betrag;
+    private final String currency;
+    private final String kontoNr;
+    private final String blz;
+    private final String transDatum;
+    private final String valuta;
+    private final String mandatReferenz;
+    private final String kundeId;
+    private final String vw1;
+    private final String vw2;
+    private final String bemerkung1;
+    private final String bemerkung2;
+    private final String bemerkung3;
 
 
     public CsvRowModel(int rowNr,
                        String table,
-                       String transaktion_typ_key,
-                       String operation_typ_key,
-                       String transactions_code,
-                       String transaktion_nummer,
-                       String additional_transaktion_number,
+                       String transaktionTypKey,
+                       String operationTypKey,
+                       String transactionsCode,
+                       String transaktionNr,
+                       String additionalTransaktionNr,
                        String betrag,
                        String currency,
-                       String kontonr,
+                       String kontoNr,
                        String blz,
-                       String trans_datum,
+                       String transDatum,
                        String valuta,
-                       String mandateferenz,
-                       String kunde_id,
-                       String vw_1,
-                       String vw_2,
-                       String bemerkung_1,
-                       String bemerkung_2,
-                       String bemerkung_3) {
+                       String mandatReferenz,
+                       String kundeId,
+                       String vw1,
+                       String vw2,
+                       String bemerkung1,
+                       String bemerkung2,
+                       String bemerkung3) {
         this.rowNr = rowNr;
         this.table = table;
-        this.transaktion_typ_key = transaktion_typ_key;
-        this.operation_typ_key = operation_typ_key;
-        this.transactions_code = transactions_code;
-        this.transaktion_nummer = transaktion_nummer;
-        this.additional_transaktion_number = additional_transaktion_number;
+        this.transaktionTypKey = transaktionTypKey;
+        this.operationTypKey = operationTypKey;
+        this.transactionsCode = transactionsCode;
+        this.transaktionNr = transaktionNr;
+        this.additionalTransaktionNr = additionalTransaktionNr;
         this.betrag = betrag;
         this.currency = currency;
-        this.kontonr = kontonr;
+        this.kontoNr = kontoNr;
         this.blz = blz;
-        this.trans_datum = trans_datum;
+        this.transDatum = transDatum;
         this.valuta = valuta;
-        this.mandateferenz = mandateferenz;
-        this.kunde_id = kunde_id;
-        this.vw_1 = vw_1;
-        this.vw_2 = vw_2;
-        this.bemerkung_1 = bemerkung_1;
-        this.bemerkung_2 = bemerkung_2;
-        this.bemerkung_3 = bemerkung_3;
+        this.mandatReferenz = mandatReferenz;
+        this.kundeId = kundeId;
+        this.vw1 = vw1;
+        this.vw2 = vw2;
+        this.bemerkung1 = bemerkung1;
+        this.bemerkung2 = bemerkung2;
+        this.bemerkung3 = bemerkung3;
     }
 
     public int getRowNr() {
         return rowNr;
     }
 
-    public void setRowNr(int rowNr) {
-        this.rowNr = rowNr;
-    }
-
     public String getTable() {
         return table;
     }
 
-    public void setTable(String table) {
-        this.table = table;
+    public String getTransaktionTypKey() {
+        return transaktionTypKey;
     }
 
-    public String getTransaktion_typ_key() {
-        return transaktion_typ_key;
+    public String getOperationTypKey() {
+        return operationTypKey;
     }
 
-    public void setTransaktion_typ_key(String transaktion_typ_key) {
-        this.transaktion_typ_key = transaktion_typ_key;
+    public String getTransactionsCode() {
+        return transactionsCode;
     }
 
-    public String getOperation_typ_key() {
-        return operation_typ_key;
+    public String getTransaktionNr() {
+        return transaktionNr;
     }
 
-    public void setOperation_typ_key(String operation_typ_key) {
-        this.operation_typ_key = operation_typ_key;
-    }
-
-    public String getTransactions_code() {
-        return transactions_code;
-    }
-
-    public void setTransactions_code(String transactions_code) {
-        this.transactions_code = transactions_code;
-    }
-
-    public String getTransaktion_nummer() {
-        return transaktion_nummer;
-    }
-
-    public void setTransaktion_nummer(String transaktion_nummer) {
-        this.transaktion_nummer = transaktion_nummer;
-    }
-
-    public String getAdditional_transaktion_number() {
-        return additional_transaktion_number;
-    }
-
-    public void setAdditional_transaktion_number(String additional_transaktion_number) {
-        this.additional_transaktion_number = additional_transaktion_number;
+    public String getAdditionalTransaktionNr() {
+        return additionalTransaktionNr;
     }
 
     public String getBetrag() {
         return betrag;
     }
 
-    public void setBetrag(String betrag) {
-        this.betrag = betrag;
-    }
-
     public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getKontonr() {
-        return kontonr;
-    }
-
-    public void setKontonr(String kontonr) {
-        this.kontonr = kontonr;
+    public String getKontoNr() {
+        return kontoNr;
     }
 
     public String getBlz() {
         return blz;
     }
 
-    public void setBlz(String blz) {
-        this.blz = blz;
-    }
-
-    public String getTrans_datum() {
-        return trans_datum;
-    }
-
-    public void setTrans_datum(String trans_datum) {
-        this.trans_datum = trans_datum;
+    public String getTransDatum() {
+        return transDatum;
     }
 
     public String getValuta() {
         return valuta;
     }
 
-    public void setValuta(String valuta) {
-        this.valuta = valuta;
+    public String getMandatReferenz() {
+        return mandatReferenz;
     }
 
-    public String getMandateferenz() {
-        return mandateferenz;
+    public String getKundeId() {
+        return kundeId;
     }
 
-    public void setMandateferenz(String mandateferenz) {
-        this.mandateferenz = mandateferenz;
+    public String getVw1() {
+        return vw1;
     }
 
-    public String getKunde_id() {
-        return kunde_id;
+    public String getVw2() {
+        return vw2;
     }
 
-    public void setKunde_id(String kunde_id) {
-        this.kunde_id = kunde_id;
+    public String getBemerkung1() {
+        return bemerkung1;
     }
 
-    public String getVw_1() {
-        return vw_1;
+    public String getBemerkung2() {
+        return bemerkung2;
     }
 
-    public void setVw_1(String vw_1) {
-        this.vw_1 = vw_1;
-    }
-
-    public String getVw_2() {
-        return vw_2;
-    }
-
-    public void setVw_2(String vw_2) {
-        this.vw_2 = vw_2;
-    }
-
-    public String getBemerkung_1() {
-        return bemerkung_1;
-    }
-
-    public void setBemerkung_1(String bemerkung_1) {
-        this.bemerkung_1 = bemerkung_1;
-    }
-
-    public String getBemerkung_2() {
-        return bemerkung_2;
-    }
-
-    public void setBemerkung_2(String bemerkung_2) {
-        this.bemerkung_2 = bemerkung_2;
-    }
-
-    public String getBemerkung_3() {
-        return bemerkung_3;
-    }
-
-    public void setBemerkung_3(String bemerkung_3) {
-        this.bemerkung_3 = bemerkung_3;
+    public String getBemerkung3() {
+        return bemerkung3;
     }
 
     @Override
@@ -235,24 +155,24 @@ public class CsvRowModel {
         return "CsvRowModel{" +
                 "rowNr=" + rowNr +
                 ", table='" + table + '\'' +
-                ", transaktion_typ_key='" + transaktion_typ_key + '\'' +
-                ", operation_typ_key='" + operation_typ_key + '\'' +
-                ", transactions_code='" + transactions_code + '\'' +
-                ", transaktion_nummer='" + transaktion_nummer + '\'' +
-                ", additional_transaktion_number='" + additional_transaktion_number + '\'' +
+                ", transaktion_typ_key='" + transaktionTypKey + '\'' +
+                ", operation_typ_key='" + operationTypKey + '\'' +
+                ", transactions_code='" + transactionsCode + '\'' +
+                ", transaktion_nummer='" + transaktionNr + '\'' +
+                ", additional_transaktion_number='" + additionalTransaktionNr + '\'' +
                 ", betrag='" + betrag + '\'' +
                 ", currency='" + currency + '\'' +
-                ", kontonr='" + kontonr + '\'' +
+                ", kontonr='" + kontoNr + '\'' +
                 ", blz='" + blz + '\'' +
-                ", trans_datum='" + trans_datum + '\'' +
+                ", trans_datum='" + transDatum + '\'' +
                 ", valuta='" + valuta + '\'' +
-                ", mandateferenz='" + mandateferenz + '\'' +
-                ", kunde_id='" + kunde_id + '\'' +
-                ", vw_1='" + vw_1 + '\'' +
-                ", vw_2='" + vw_2 + '\'' +
-                ", bemerkung_1='" + bemerkung_1 + '\'' +
-                ", bemerkung_2='" + bemerkung_2 + '\'' +
-                ", bemerkung_3='" + bemerkung_3 + '\'' +
+                ", mandateferenz='" + mandatReferenz + '\'' +
+                ", kunde_id='" + kundeId + '\'' +
+                ", vw_1='" + vw1 + '\'' +
+                ", vw_2='" + vw2 + '\'' +
+                ", bemerkung_1='" + bemerkung1 + '\'' +
+                ", bemerkung_2='" + bemerkung2 + '\'' +
+                ", bemerkung_3='" + bemerkung3 + '\'' +
                 '}';
     }
 }
