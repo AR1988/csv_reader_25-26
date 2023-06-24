@@ -24,6 +24,10 @@ public class Main {
         File file = fileService.readFolder("./source");
         List<String> rows = fileService.readFile(file);
 
+//        Converter<Long> longConverter = new LongConverter();
+//        List<String> errors = new ArrayList<>();
+//        Long convert = longConverter.convert("123", "TEST", errors, true);
+//        System.out.println(convert);
 
         if (!rows.isEmpty()) {
             boolean hasHeader = hasHeader(rows.get(0));
