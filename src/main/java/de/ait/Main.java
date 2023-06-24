@@ -1,10 +1,16 @@
 package de.ait;
 
 import de.ait.logger.Logger;
+import de.ait.mapper.CsvMapper;
+import de.ait.mapper.TransactionMapper;
 import de.ait.model.CsvRowModel;
+import de.ait.model.Transaction;
 import de.ait.service.FileService;
+import de.ait.service.IFileService;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,18 +22,14 @@ import java.util.List;
 public class Main {
 
     private static final String DELIMITER = ";";
-    private static final FileService fileService = new FileService();
+    private static final IFileService fileService = new FileService();
     private static final String TITLE = "TABLE";
     private static final int SIZE = 19;
+    private static final String DIR_SOURCE = "./source";
 
     public static void main(String[] args) {
-        File file = fileService.readFolder("./source");
+        File file = fileService.readFolder(DIR_SOURCE);
         List<String> rows = fileService.readFile(file);
-
-//        Converter<Long> longConverter = new LongConverter();
-//        List<String> errors = new ArrayList<>();
-//        Long convert = longConverter.convert("123", "TEST", errors, true);
-//        System.out.println(convert);
 
         if (!rows.isEmpty()) {
             boolean hasHeader = hasHeader(rows.get(0));
@@ -44,6 +46,22 @@ public class Main {
                     Logger.error("Размер не соответствует ожидаемому. Ожидается " + SIZE + " актуальный:" + splitColumn.size());
                 }
             }
+
+            List<Transaction> transactionList = new ArrayList<>();
+            List<String> errors = new ArrayList<>();
+            for (CsvRowModel fileModel : fileModels) {
+                Transaction transaction = TransactionMapper.mapToTransaction(fileModel);
+                errors.add(fileModel.getErrorMsg());
+                transactionList.add(transaction);
+            }
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+            fileService.writeFile(errors, DIR_SOURCE + "/" + LocalDateTime.now().format(formatter) + ".report");
+
+//            List<Transaction> transactionListStream = fileModels.stream()
+////                    .map(row -> TransactionMapper.mapToTransaction(row))
+//                    .peek(tr -> Logger.info(tr.toString()))
+//                    .map(TransactionMapper::mapToTransaction)
+//                    .collect(Collectors.toList());
 
             print(fileModels);
         }

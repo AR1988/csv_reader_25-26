@@ -1,5 +1,8 @@
 package de.ait.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Andrej Reutow
  * created on 10.06.2023
@@ -7,6 +10,7 @@ package de.ait.model;
 public class CsvRowModel {
 
     private final int rowNr;
+    private final List<String> errors;
     private final String table;
     private final String transaktionTypKey;
     private final String operationTypKey;
@@ -49,6 +53,7 @@ public class CsvRowModel {
                        String bemerkung2,
                        String bemerkung3) {
         this.rowNr = rowNr;
+        this.errors = new ArrayList<>();
         this.table = table;
         this.transaktionTypKey = transaktionTypKey;
         this.operationTypKey = operationTypKey;
@@ -70,8 +75,22 @@ public class CsvRowModel {
         this.bemerkung3 = bemerkung3;
     }
 
+    public String getErrorMsg() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < errors.size(); i++) {
+            String rowErrorMsg = String.format("Строка %d, Ошибка #%d, %s", rowNr, (i + 1), errors.get(i));
+            sb.append(rowErrorMsg);
+            sb.append(System.lineSeparator());
+        }
+        return sb.deleteCharAt(sb.length() - 1).toString();
+    }
+
     public int getRowNr() {
         return rowNr;
+    }
+
+    public List<String> getErrors() {
+        return errors;
     }
 
     public String getTable() {

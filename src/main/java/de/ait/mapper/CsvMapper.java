@@ -1,4 +1,4 @@
-package de.ait;
+package de.ait.mapper;
 
 import de.ait.model.CsvRowModel;
 
@@ -8,8 +8,7 @@ import java.util.List;
  * @author Andrej Reutow
  * created on 10.06.2023
  */
-public class CsvMapper {
-
+public class CsvMapper  {
 
     private CsvMapper() {
     }

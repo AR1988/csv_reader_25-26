@@ -79,7 +79,7 @@ public class FileService implements IFileService {
      */
     @Override
     public void writeFile(List<String> rows, String pathToWrite) {
-        try (FileWriter fileWriter = new FileWriter(pathToWrite)) {
+        try (FileWriter fileWriter = new FileWriter(pathToWrite, true)) {
             for (String row : rows) {
                 fileWriter.write(row + System.lineSeparator());
             }
