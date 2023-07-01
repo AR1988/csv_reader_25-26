@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Andrej Reutow
@@ -51,8 +52,10 @@ public class FileService implements IFileService {
                 files.add(file);
             }
         }
+
         Logger.info("В папке " + folderPath + " содержится " + files.size() + " файлов");
         files.sort(new ComparatorSortByDate());
+        // todo fix IndexOutOfBoundsException
         File file = files.get(0);
         Logger.info("Самый старый файл в папке: " + folderPath + " : " + file.getName());
         return file;
@@ -79,10 +82,16 @@ public class FileService implements IFileService {
      */
     @Override
     public void writeFile(List<String> rows, String pathToWrite) {
-        try (FileWriter fileWriter = new FileWriter(pathToWrite, true)) {
-            for (String row : rows) {
-                fileWriter.write(row + System.lineSeparator());
-            }
+        final File file = new File(pathToWrite);
+        try (final FileWriter fileWriter = new FileWriter(file, true)) {
+            final String result = rows.stream()
+                    .collect(Collectors.joining(System.lineSeparator()));
+            fileWriter.write(result);
+
+//            for (String row : rows) {
+//                fileWriter.write(row + System.lineSeparator());
+//            }
+
         } catch (IOException e) {
             //todo handle it
             throw new RuntimeException(e);

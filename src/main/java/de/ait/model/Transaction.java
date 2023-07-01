@@ -35,17 +35,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(TransaktionTyp transaktionTyp,
-                       OperationTyp operationTyp,
-                       TransaktionCode transactionsCode,
-                       Long transaktionNummer,
-                       Integer additionalTransaktionNumber,
-                       Double betrag,
-                       Integer currency,
-                       LocalDateTime transDatum,
-                       LocalDateTime valuta,
-                       String bemerkung1,
-                       String bemerkung2) {
+    public Transaction(TransaktionTyp transaktionTyp, OperationTyp operationTyp, TransaktionCode transactionsCode, Long transaktionNummer, Integer additionalTransaktionNumber, Double betrag, Integer currency, LocalDateTime transDatum, LocalDateTime valuta, String bemerkung1, String bemerkung2) {
         this.transaktionTyp = transaktionTyp;
         this.operationTyp = operationTyp;
         this.transactionsCode = transactionsCode;
@@ -124,18 +114,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "transaktionTyp=" + transaktionTyp +
-                ", operationTyp=" + operationTyp +
-                ", transactionsCode=" + transactionsCode +
-                ", transaktionNummer=" + transaktionNummer +
-                ", additionalTransaktionNumber=" + additionalTransaktionNumber +
-                ", betrag=" + betrag +
-                ", currency=" + currency +
-                ", transDatum=" + transDatum +
-                ", valuta=" + valuta +
-                ", bemerkung1='" + bemerkung1 + '\'' +
-                ", bemerkung2='" + bemerkung2 + '\'' +
-                '}';
+        return "Transaction{" + "transaktionTyp=" + transaktionTyp + ", operationTyp=" + operationTyp + ", transactionsCode=" + transactionsCode + ", transaktionNummer=" + transaktionNummer + ", additionalTransaktionNumber=" + additionalTransaktionNumber + ", betrag=" + betrag + ", currency=" + currency + ", transDatum=" + transDatum + ", valuta=" + valuta + ", bemerkung1='" + bemerkung1 + '\'' + ", bemerkung2='" + bemerkung2 + '\'' + '}';
     }
 }

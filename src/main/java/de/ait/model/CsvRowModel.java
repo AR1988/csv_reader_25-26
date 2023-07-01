@@ -80,9 +80,11 @@ public class CsvRowModel {
         for (int i = 0; i < errors.size(); i++) {
             String rowErrorMsg = String.format("Строка %d, Ошибка #%d, %s", rowNr, (i + 1), errors.get(i));
             sb.append(rowErrorMsg);
-            sb.append(System.lineSeparator());
+            if (i < errors.size() - 1) {
+                sb.append(System.lineSeparator());
+            }
         }
-        return sb.deleteCharAt(sb.length() - 1).toString();
+        return sb.toString();
     }
 
     public int getRowNr() {

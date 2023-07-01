@@ -5,12 +5,13 @@ import de.ait.mapper.CsvMapper;
 import de.ait.mapper.TransactionMapper;
 import de.ait.model.CsvRowModel;
 import de.ait.model.Transaction;
+import de.ait.service.FileMover;
+import de.ait.service.FileNameUtil;
 import de.ait.service.FileService;
 import de.ait.service.IFileService;
 
 import java.io.File;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,8 +55,16 @@ public class Main {
                 errors.add(fileModel.getErrorMsg());
                 transactionList.add(transaction);
             }
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
-            fileService.writeFile(errors, DIR_SOURCE + "/" + LocalDateTime.now().format(formatter) + ".report");
+
+
+            final String reportFileName = FileNameUtil.generateReportFileName(file.getName(), LocalDateTime.now());
+            final String reportFilePath = DIR_SOURCE + "/" + reportFileName;
+
+            fileService.writeFile(errors, reportFilePath);
+
+            FileMover fileMover = new FileMover(DIR_SOURCE + "/done");
+            fileMover.move(reportFilePath, reportFileName);
+            fileMover.move(file.getPath(), file.getName());
 
 //            List<Transaction> transactionListStream = fileModels.stream()
 ////                    .map(row -> TransactionMapper.mapToTransaction(row))
