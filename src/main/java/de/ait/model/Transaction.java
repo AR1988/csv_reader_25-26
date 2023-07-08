@@ -1,8 +1,5 @@
 package de.ait.model;
 
-import de.ait.models.OperationTyp;
-import de.ait.models.TransaktionCode;
-import de.ait.models.TransaktionTyp;
 
 import java.time.LocalDateTime;
 

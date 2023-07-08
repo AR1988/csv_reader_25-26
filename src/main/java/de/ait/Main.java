@@ -1,7 +1,10 @@
 package de.ait;
 
+import de.ait.converter.RowConverter;
+import de.ait.converter.strategy.*;
 import de.ait.logger.Logger;
 import de.ait.mapper.CsvMapper;
+import de.ait.mapper.RowConverterEnum;
 import de.ait.mapper.TransactionMapper;
 import de.ait.model.CsvRowModel;
 import de.ait.model.Transaction;
@@ -14,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Andrej Reutow
@@ -49,8 +53,10 @@ public class Main {
 
             List<Transaction> transactionList = new ArrayList<>();
             List<String> errors = new ArrayList<>();
+            Map<RowConverterEnum, RowConverter> converters = getConverters();
+            TransactionMapper transactionMapper = new TransactionMapper(converters);
             for (CsvRowModel fileModel : fileModels) {
-                Transaction transaction = TransactionMapper.mapToTransaction(fileModel);
+                Transaction transaction = transactionMapper.mapToTransaction(fileModel);
                 errors.add(fileModel.getErrorMsg());
                 transactionList.add(transaction);
             }
@@ -65,6 +71,20 @@ public class Main {
 
             print(fileModels);
         }
+    }
+
+    private static Map<RowConverterEnum, RowConverter> getConverters() {
+        return Map.of(
+                RowConverterEnum.INTEGER, new IntConverterStrategy(),
+                RowConverterEnum.LONG, new LongConverterStrategy(),
+                RowConverterEnum.DOUBLE, new DoubleConverterStrategy(),
+                RowConverterEnum.LOCAL_DATE_TIME, new LocalDateTimeConverterStrategy(),
+                RowConverterEnum.LOCAL_DATE, new LocalDateConverterStrategy(),
+                RowConverterEnum.STRING, new StringConverterStrategy(),
+                RowConverterEnum.OPERATION_TYPE, new OperationTypConverterStrategy(),
+                RowConverterEnum.TRANSAKTION_CODE, new TransaktionCodeConverterStrategy(),
+                RowConverterEnum.TRANSAKTION_TYPE, new TransaktionTypConverterStrategy()
+        );
     }
 
     private static void print(List<CsvRowModel> fileModels) {

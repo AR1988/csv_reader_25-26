@@ -82,7 +82,7 @@ public class CsvRowModel {
             sb.append(rowErrorMsg);
             sb.append(System.lineSeparator());
         }
-        return sb.deleteCharAt(sb.length() - 1).toString();
+        return sb.length() > 1 ? sb.deleteCharAt(sb.length() - 1).toString() : sb.toString();
     }
 
     public int getRowNr() {

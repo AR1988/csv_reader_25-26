@@ -1,14 +1,11 @@
 package de.ait.mapper;
 
-import de.ait.*;
-import de.ait.model.CsvRowModel;
-import de.ait.model.Transaction;
-import de.ait.models.OperationTyp;
-import de.ait.models.TransaktionCode;
-import de.ait.models.TransaktionTyp;
+import de.ait.converter.RowConverter;
+import de.ait.model.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Andrej Reutow
@@ -16,22 +13,26 @@ import java.util.List;
  */
 public class TransactionMapper {
 
-    private TransactionMapper() {
+    private final Map<RowConverterEnum, RowConverter> rowConverters;
+
+    public TransactionMapper(Map<RowConverterEnum, RowConverter> rowConverters) {
+        this.rowConverters = rowConverters;
     }
 
-    public static Transaction mapToTransaction(CsvRowModel model) {
+    @SuppressWarnings("unchecked")
+    public Transaction mapToTransaction(CsvRowModel model) {
         List<String> errors = model.getErrors();
 
-        Converter<TransaktionTyp> transaktionTypConverter = new TransaktionTypConverter();
-        Converter<OperationTyp> operationTypConverter = new OperationTypConverter();
-        Converter<TransaktionCode> transaktionCodeConverter = new TransaktionCodeConverter();
-        Converter<Long> longConverter = new LongConverter();
-        Converter<Integer> integerConverter = new IntConverter();
-        Converter<Double> doubleConverter = new DoubleConverter();
-        Converter<LocalDateTime> localDataTimeConverter = new LocalDataTimeConverter();
-        Converter<String> stringConverter = new StringConverter();
+        RowConverter<TransaktionTyp> transaktionTypConverter = rowConverters.get(RowConverterEnum.TRANSAKTION_TYPE);
+        RowConverter<OperationTyp> operationTypConverter = rowConverters.get(RowConverterEnum.OPERATION_TYPE);
+        RowConverter<TransaktionCode> transaktionCodeConverter = rowConverters.get(RowConverterEnum.TRANSAKTION_CODE);
+        RowConverter<Long> longConverter = rowConverters.get(RowConverterEnum.LONG);
+        RowConverter<Integer> integerConverter = rowConverters.get(RowConverterEnum.INTEGER);
+        RowConverter<Double> doubleConverter = rowConverters.get(RowConverterEnum.DOUBLE);
+        RowConverter<LocalDateTime> localDataTimeConverter = rowConverters.get(RowConverterEnum.LOCAL_DATE_TIME);
+        RowConverter<String> stringConverter = rowConverters.get(RowConverterEnum.STRING);
 
-        Transaction transaction = new Transaction(
+        return new Transaction(
                 transaktionTypConverter.convert(
                         model.getTransaktionTypKey(),
                         "TRANSAKTION_TYP_KEY",
@@ -90,17 +91,14 @@ public class TransactionMapper {
                         model.getBemerkung1(),
                         "BEMERKUNG1",
                         errors,
-                        true
+                        false
                 ),
                 stringConverter.convert(
                         model.getBemerkung2(),
                         "BEMERKUNG2",
                         errors,
-                        true
+                        false
                 )
         );
-
-
-        return transaction;
     }
 }
